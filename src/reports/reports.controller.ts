@@ -32,12 +32,12 @@ export class ReportsController {
 
     @Patch("/:id")
     @UseGuards(AdminGuard)
-    async approveReport(@Param("id") id: string, @Body() body: ApproveReport) {
+    approveReport(@Param("id") id: string, @Body() body: ApproveReport) {
         return this.reportService.changeApproval(id, body.approved);
     }
 
     @Get()
-    getEstimate(@Query() query: GetEstimateDto) {
-        console.log(query);
+    async getEstimate(@Query() query: GetEstimateDto) {
+        return await this.reportService.createEstimate(query);
     }
 }
